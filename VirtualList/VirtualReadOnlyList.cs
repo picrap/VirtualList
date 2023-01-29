@@ -3,12 +3,7 @@ using System.Linq;
 
 namespace VirtualList;
 
-public interface IVirtualListReader<out TItem>
-{
-    public IEnumerable<TItem> Get(int offset, int count);
-}
-
-partial class VirtualReadOnlyList<TItem> 
+public partial class VirtualReadOnlyList<TItem>
 {
     private class Page
     {
@@ -36,10 +31,11 @@ partial class VirtualReadOnlyList<TItem>
         }
     }
 
-    public VirtualReadOnlyList(IVirtualListReader<TItem> reader, int size)
+    public VirtualReadOnlyList(IVirtualListReader<TItem> reader, int size, int pageSize = 256)
     {
         _reader = reader;
         _size = size;
+        _pageSize = pageSize;
     }
 
     private Page GetPage(int index) => TryGetPage(index) ?? LoadPage(index);
