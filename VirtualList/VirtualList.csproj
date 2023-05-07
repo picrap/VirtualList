@@ -7,6 +7,26 @@
     <IsPublishable>true</IsPublishable>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <IncludeSymbols>True</IncludeSymbols>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <Title>VirtualList</Title>
+    <Description>A list implementation that can be filled progressively </Description>
+    <PackageProjectUrl>https://github.com/picrap/VirtualList</PackageProjectUrl>
+    <PackageIcon>VirtualList.png</PackageIcon>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/picrap/VirtualList.git</RepositoryUrl>
+    <PackageTags>virtual list</PackageTags>
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\Icon\VirtualList.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
 
 </Project>
