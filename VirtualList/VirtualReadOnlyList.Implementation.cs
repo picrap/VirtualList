@@ -6,7 +6,9 @@ namespace VirtualList;
 
 partial class VirtualReadOnlyList<TItem> : IReadOnlyList<TItem>
 {
-    private class Enumerator : IEnumerator<TItem>
+#pragma warning disable S3881
+    private sealed class Enumerator : IEnumerator<TItem>
+#pragma warning restore S3881
     {
         private readonly VirtualReadOnlyList<TItem> _list;
         private int _currentIndex;
@@ -20,12 +22,16 @@ partial class VirtualReadOnlyList<TItem> : IReadOnlyList<TItem>
             Reset();
         }
 
+        public void Dispose()
+        {
+            // nothing to do here
+        }
+
         public bool MoveNext() => _currentIndex++ < _list.Count;
         public void Reset() => _currentIndex = -1;
-        public void Dispose() { }
     }
 
-    public int Count => _size;
+    public int Count { get; }
 
     public IEnumerator<TItem> GetEnumerator() => new Enumerator(this);
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
