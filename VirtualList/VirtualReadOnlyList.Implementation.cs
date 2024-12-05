@@ -27,7 +27,7 @@ partial class VirtualReadOnlyList<TItem> : IReadOnlyList<TItem>
             // nothing to do here
         }
 
-        public bool MoveNext() => _currentIndex++ < _list.Count;
+        public bool MoveNext() => ++_currentIndex < _list.Count;
         public void Reset() => _currentIndex = -1;
     }
 

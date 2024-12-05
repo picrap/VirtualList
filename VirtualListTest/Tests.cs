@@ -11,7 +11,7 @@ public class Tests
 {
     public class IntReader : IVirtualListReader<int>
     {
-        public ISet<int> Pages = new HashSet<int>();
+        public readonly HashSet<int> Pages = new();
 
         public IEnumerable<int> Get(int offset, int count)
         {
@@ -42,5 +42,14 @@ public class Tests
         Assert.AreEqual(12, range[2]);
         Assert.AreEqual(1, reader.Pages.Count);
         Assert.AreEqual(7, reader.Pages.Single());
+    }
+
+    [Test]
+    public void ToArrayTest()
+    {
+        var reader = new IntReader();
+        var list = new VirtualReadOnlyList<int>(reader, 32, 8);
+        var range = list.ToArray();
+        Assert.AreEqual(32, range.Length);
     }
 }

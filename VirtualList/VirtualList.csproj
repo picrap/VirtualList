@@ -16,7 +16,7 @@
     <RepositoryUrl>https://github.com/picrap/VirtualList.git</RepositoryUrl>
     <PackageTags>virtual list</PackageTags>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
   </PropertyGroup>
 
   <ItemGroup>
