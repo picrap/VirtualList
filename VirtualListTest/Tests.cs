@@ -9,7 +9,7 @@ namespace VirtualListTest;
 
 public class Tests
 {
-    public class IntReader : IVirtualListReader<int>
+    public sealed class IntReader : IVirtualListReader<int>
     {
         public readonly HashSet<int> Pages = new();
 
@@ -25,10 +25,10 @@ public class Tests
     {
         var reader = new IntReader();
         var list = new VirtualReadOnlyList<int>(reader, 20, 7);
-        Assert.AreEqual(3, list[3]);
-        Assert.AreEqual(13, list[13]);
-        Assert.IsTrue(reader.Pages.Contains(0));
-        Assert.IsTrue(reader.Pages.Contains(7));
+        Assert.That(list[3], Is.EqualTo(3));
+        Assert.That(list[13], Is.EqualTo(13));
+        Assert.That(reader.Pages.Contains(0));
+        Assert.That(reader.Pages.Contains(7));
     }
 
     [Test]
@@ -37,11 +37,11 @@ public class Tests
         var reader = new IntReader();
         var list = new VirtualReadOnlyList<int>(reader, 20, 7);
         var range = list.Skip(10).Take(3).ToArray();
-        Assert.AreEqual(10, range[0]);
-        Assert.AreEqual(11, range[1]);
-        Assert.AreEqual(12, range[2]);
-        Assert.AreEqual(1, reader.Pages.Count);
-        Assert.AreEqual(7, reader.Pages.Single());
+        Assert.That(range[0], Is.EqualTo(10));
+        Assert.That(range[1], Is.EqualTo(11));
+        Assert.That(range[2], Is.EqualTo(12));
+        Assert.That(reader.Pages.Count, Is.EqualTo(1));
+        Assert.That(reader.Pages.Single(), Is.EqualTo(7));
     }
 
     [Test]
@@ -50,6 +50,6 @@ public class Tests
         var reader = new IntReader();
         var list = new VirtualReadOnlyList<int>(reader, 32, 8);
         var range = list.ToArray();
-        Assert.AreEqual(32, range.Length);
+        Assert.That(range.Length, Is.EqualTo(32));
     }
 }
